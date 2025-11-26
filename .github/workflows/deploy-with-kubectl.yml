@@ -2,6 +2,10 @@ name: Deployment using kubectl
 on: 
   workflow_call:
     inputs:
+      ENVIRONMENT:
+        description: 'Deployment Environment (e.g., STAGING, PRODUCTION).'
+        required: true
+        type: string
       NAMESPACE:
         description: 'Kubernetes Namespace to deploy the application.'
         required: true
@@ -16,6 +20,7 @@ on:
         required: true
 jobs:        
   deploy:
+    environment: ${{ inputs.ENVIRONMENT }}
     env:
       NAMESPACE: ${{ inputs.NAMESPACE}}
 
