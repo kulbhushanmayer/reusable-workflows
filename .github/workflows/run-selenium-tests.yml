@@ -1,0 +1,44 @@
+name: Run Selenium Tests
+on: 
+  workflow_call:
+    inputs:
+      ENVIRONMENT:
+        description: 'Deployment Environment (e.g., STAGING, PRODUCTIONd).'
+        required: true
+        type: string
+
+jobs:        
+  deploy:
+    environment: ${{ inputs.ENVIRONMENT }}
+    runs-on: github-actions-scaleset-demo
+    steps:
+      - name: CheckoutCode
+        uses: actions/checkout@v5
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.10'
+      - name: Install Google Chrome
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y wget gnupg ca-certificates
+            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
+            | sudo tee /etc/apt/sources.list.d/google-chrome.list
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-tests.txt
+      - name: Run Selenium Tests
+        env: 
+          APP_BASE_URL: ${{ vars.APP_BASE_URL }}
+        run: |  
+          mkdir -p reports
+          pytest tests/ --html=reports/selenium-report.html --self-contained-html
+      - name: Upload Selenium Test Report
+        uses: actions/upload-artifact@v5
+        with:
+          name: selenium-test-report
+          path: reports/
+          
