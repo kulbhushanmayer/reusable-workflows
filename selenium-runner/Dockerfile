@@ -41,7 +41,7 @@ RUN python3 -m venv /opt/venv \
 
 # Create working dir & add minimal scripts
 WORKDIR /workspace
-COPY requirements-tests.txt /workspace/requirements-tests.txt
+COPY requirements-tests.txt /workspace/requirements.txt
 # Install test deps into venv (this is done at build time; if builder has internet)
 RUN /opt/venv/bin/pip install --no-cache-dir -r /workspace/requirements-tests.txt
 
