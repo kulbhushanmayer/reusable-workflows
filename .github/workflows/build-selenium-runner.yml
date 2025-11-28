@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: selenium-runner/
-          file: dockerfile.selenium_runner
+          file: selenium_runner/Dockerfile
           push: true
           tags: ghcr.io/kulbhushanmayer/selenium-runner:latest
           cache-from: type=gha
