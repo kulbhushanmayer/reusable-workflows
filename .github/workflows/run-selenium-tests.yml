@@ -11,11 +11,11 @@ jobs:
   run-test:
     environment: ${{ inputs.ENVIRONMENT }}
     runs-on: github-actions-scaleset-demo
-    # container:
-    #   image: ghcr.io/kulbhushanmayer/reusable-workflows/selenium-runner:latest
-    #   credentials:
-    #     username: ${{ github.actor }}
-    #     password: ${{ secrets.GITHUB_TOKEN }}
+    container:
+      image: ghcr.io/kulbhushanmayer/reusable-workflows/selenium-runner:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: CheckoutCode
         uses: actions/checkout@v5
