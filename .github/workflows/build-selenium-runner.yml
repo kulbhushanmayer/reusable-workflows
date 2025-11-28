@@ -4,7 +4,8 @@ on:
     branches:
       - "**"
     paths:
-      - docker.selenium_runner
+      - dockerfile.selenium_runner
+      - .github/workflows/build-selenium-runner.yml
 
 permissions:
   contents: read
