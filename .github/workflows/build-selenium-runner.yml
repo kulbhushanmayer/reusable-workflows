@@ -4,7 +4,7 @@ on:
     branches:
       - "**"
     paths:
-      - dockerfile.selenium_runner
+      - selenium-runner/**
       - .github/workflows/build-selenium-runner.yml
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: selenium-runner/
           file: dockerfile.selenium_runner
           push: true
           tags: ghcr.io/kulbhushanmayer/selenium-runner:latest
