@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v5
       - name: Docker Metadata
         uses: docker/metadata-action@v5
+        id: meta
         with:
           images: ghcr.io/${{ github.repository }}/selenium-runner
           tags: |
@@ -37,7 +38,6 @@ jobs:
           file: selenium_runner/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
         
