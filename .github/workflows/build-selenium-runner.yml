@@ -34,8 +34,8 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: selenium_runner
-          file: selenium_runner/Dockerfile
+          context: selenium-runner
+          file: selenium-runner/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha
